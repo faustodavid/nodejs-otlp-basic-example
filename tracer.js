@@ -6,7 +6,7 @@ const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
 const { Resource } = require('@opentelemetry/resources');
 const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
 const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
-const {OTLPTraceExporter} = require('@opentelemetry/exporter-trace-otlp-grpc');
+const { ZipkinExporter } = require('@opentelemetry/exporter-zipkin');
 const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
 
 const EXPORTER = process.env.EXPORTER || '';
@@ -18,8 +18,8 @@ module.exports = (serviceName) => {
     }),
   });
 
-  let exporter = new OTLPTraceExporter({
-    url: 'http://localhost:4317'
+  let exporter = new ZipkinExporter({
+    url: 'http://localhost:9411'
   });
 
   provider.addSpanProcessor(new SimpleSpanProcessor(exporter));

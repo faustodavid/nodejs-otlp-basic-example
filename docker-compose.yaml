@@ -8,7 +8,7 @@ services:
     volumes:
       - ./otel-collector.multitenant.yaml:/etc/otel-collector.yaml
     ports:
-      - "4317:4317"     #otlp GRPC
+      - "9411:9411"     #zipkin
 
   tempo:
     image: grafana/tempo:latest
